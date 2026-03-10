@@ -34,16 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("org.apache.commons:commons-lang3:3.17.0")
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
-
-    // Tests
-    testImplementation("org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.54.0") {
-        // Exclude the JetBrains annotations to prevent conflicts
-        exclude(group = "org.jetbrains", module = "annotations")
-    }
-    testImplementation("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.13.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
+    implementation("dev.triumphteam:triumph-gui:3.1.11")
 }
 
 java {
@@ -91,6 +82,7 @@ tasks {
         archiveClassifier.set("")
         enableRelocation = true
         relocationPrefix = "confusedalex.thegoldeconomy.libs"
+        relocate("dev.triumphteam.gui", "dev.confusedalex.thegoldeconomy.gui")
         exclude("META-INF/**")
         from("LICENSE")
         minimize()

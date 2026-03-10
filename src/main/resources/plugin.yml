@@ -22,3 +22,7 @@ permissions:
     default: true
   thegoldeconomy.balance.others:
     default: true
+  thegoldeconomy.balance.top:
+    default: true
+  thegoldeconomy.gui:
+    default: true

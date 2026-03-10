@@ -10,6 +10,9 @@
 
 </div>
 
+### Fork!
+Ive forked this repo for personal use on my private minecraft server and added a gui that resembles an atm and added a baltop utility.
+
 ## Introduction
 
 TheGoldEconomy is a powerful economy plugin that allows servers to manage their gold-based currency through a bank system. Players can deposit and withdraw gold and send money to each other. With support for both gold nuggets, ingots and raw gold this plugin is designed to be lightweight, easy to configure, and fully compatible with popular plugins like Vault and Towny.

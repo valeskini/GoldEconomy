@@ -9,9 +9,9 @@ import java.util.*
 class Converter(var eco: EconomyImplementer, var bundle: ResourceBundle) {
     fun getValue(material: Material?, base: Base): Int = when (base) {
         Base.NUGGETS -> when (material) {
-            Material.GOLD_NUGGET -> 1
-            Material.GOLD_INGOT -> 9
-            Material.GOLD_BLOCK -> 81
+            Material.TRIAL_KEY -> 1
+            Material.OMINOUS_TRIAL_KEY -> 20
+            Material.BREEZE_ROD -> 100
             else -> 0
         }
 
@@ -30,7 +30,7 @@ class Converter(var eco: EconomyImplementer, var bundle: ResourceBundle) {
 
     fun isGold(material: Material?, base: Base): Boolean = when (base) {
         Base.INGOTS, Base.NUGGETS -> when (material) {
-            Material.GOLD_BLOCK, Material.GOLD_INGOT, Material.GOLD_NUGGET -> true
+            Material.TRIAL_KEY, Material.OMINOUS_TRIAL_KEY, Material.BREEZE_ROD -> true
             else -> false
         }
 
@@ -71,8 +71,8 @@ class Converter(var eco: EconomyImplementer, var bundle: ResourceBundle) {
 
         when (base) {
             Base.INGOTS, Base.NUGGETS -> {
-                block = Material.GOLD_BLOCK
-                ingot = Material.GOLD_INGOT
+                block = Material.BREEZE_ROD
+                ingot = Material.OMINOUS_TRIAL_KEY
             }
 
             Base.RAW -> {
@@ -112,9 +112,9 @@ class Converter(var eco: EconomyImplementer, var bundle: ResourceBundle) {
         value -= (value / ingotValue) * ingotValue
 
         if (base == Base.NUGGETS && value > 0) {
-            val nuggets = player.inventory.addItem(ItemStack(Material.GOLD_NUGGET, value))
+            val nuggets = player.inventory.addItem(ItemStack(Material.TRIAL_KEY, value))
             for (item in nuggets.values) {
-                if (item != null && item.type == Material.GOLD_NUGGET && item.amount > 0) {
+                if (item != null && item.type == Material.TRIAL_KEY && item.amount > 0) {
                     player.world.dropItem(player.location, item)
                     warning = true
                 }

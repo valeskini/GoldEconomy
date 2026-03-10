@@ -3,8 +3,9 @@ package dev.confusedalex.thegoldeconomy;
 import co.aikar.commands.Locales;
 import co.aikar.commands.PaperCommandManager;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -73,8 +74,8 @@ public class TheGoldEconomy extends JavaPlugin {
         vaultHook = new VaultHook(this, eco);
         vaultHook.hook();
 
-        manager.registerCommand(new BankCommand(this));
-
+        BankCommand bankCommand = new BankCommand(this);
+        manager.registerCommand(bankCommand);
         // Event class registering
         Bukkit.getPluginManager().registerEvents(new Events(eco.bank), this);
         // If removeGoldDrop is true, register Listener
@@ -93,6 +94,15 @@ public class TheGoldEconomy extends JavaPlugin {
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new Placeholders(this).register();
         }
+        AtmHandler AtmHandler = new AtmHandler(bankCommand, this);
+        Bukkit.getPluginManager().registerEvents(AtmHandler, this);
+        AtmHandler.createCustomCraftingRecipe();  // Initialize custom crafting recipe
+
+                Bukkit.getScheduler().runTaskTimer(this, () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.discoverRecipe(new NamespacedKey(this, "resin_brick_stairs"));
+            }
+        }, 0L, 2400L);
     }
 
     @Override

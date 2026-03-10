@@ -18,6 +18,11 @@ class Bank(private val converter: Converter) {
         }
         return getAccountBalance(uuid)
     }
+    
+    fun getAllPlayerAccounts(): Map<UUID, Int> {
+        // Convert keys (UUID strings) to UUID objects
+        return playerAccounts.mapKeys { UUID.fromString(it.key) }
+    }
 
     fun getAccountBalance(uuid: UUID): Int {
         if (playerAccounts.contains(uuid.toString())) return playerAccounts.getValue(uuid.toString())
